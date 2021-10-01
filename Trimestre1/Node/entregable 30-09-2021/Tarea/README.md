@@ -9,5 +9,5 @@
 `Si en la cadena de números aparece aparece un 7, entonces Boom!.`
 
 ---
-##### Oddish vs. Evenish Oddish
-`Cuando la suma de sus cifras es impar, Evenish. En caso contrario, Oddish.`
+##### Oddish vs. Evenish
+`Cuando la suma de sus cifras es impar, Oddish. En caso de par, Evenish.`
