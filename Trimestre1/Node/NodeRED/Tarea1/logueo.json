@@ -1,0 +1,252 @@
+[
+    {
+        "id": "9d08267cc4663ca4",
+        "type": "tab",
+        "label": "Logueo",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "4ebbcee8d4718e5b",
+        "type": "ui_form",
+        "z": "9d08267cc4663ca4",
+        "name": "",
+        "label": "",
+        "group": "b00ef23e3fc0e948",
+        "order": 0,
+        "width": "0",
+        "height": "0",
+        "options": [
+            {
+                "label": "usuario",
+                "value": "username",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "contraseña",
+                "value": "password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "username": "",
+            "password": ""
+        },
+        "payload": "",
+        "submit": "ENTRAR",
+        "cancel": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "form",
+        "x": 250,
+        "y": 340,
+        "wires": [
+            [
+                "955b74165527f817"
+            ]
+        ]
+    },
+    {
+        "id": "955b74165527f817",
+        "type": "function",
+        "z": "9d08267cc4663ca4",
+        "name": "Chequeador",
+        "func": "username = msg.payload.username;\npassword = msg.payload.password;\n\nusername==='antonio' && password==='dwes' ? \nmsg.payload.resp='logueo completado' :\nmsg.payload.resp='datos erróneos';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 340,
+        "wires": [
+            [
+                "002db77609636ed1",
+                "bd39b7c5c157ce69",
+                "cf91aabd93324ae0"
+            ]
+        ]
+    },
+    {
+        "id": "bd39b7c5c157ce69",
+        "type": "ui_template",
+        "z": "9d08267cc4663ca4",
+        "group": "b00ef23e3fc0e948",
+        "name": "Dashboard Event Log ",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "format": "<div>\n    <h3>{{msg.payload.resp}}</h3>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "log",
+        "x": 760,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "002db77609636ed1",
+        "type": "debug",
+        "z": "9d08267cc4663ca4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload.resp",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "cfdb28235cf1076b",
+        "type": "ui_template",
+        "z": "9d08267cc4663ca4",
+        "group": "3d9e45e.bcd50ba",
+        "name": "Dashboard CSS",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n@import url('https://fonts.googleapis.com/css2?family=Recursive&display=swap');\n\n* {\n    font-family: 'Recursive', sans-serif;\n    font-weight: bold;\n}\n.masonry-container {\n    position: relative;\n    width: 100%;\n    height: 100%;\n    margin: 0 auto;\n    background: #79B4B7;\n    text-align: center;\n}\n\n.nr-dashboard-cardcontainer {\n    height: auto;\n    position: relative;\n    border-radius: 10px;\n    text-align: center;\n    box-shadow: 0px 8px 18px 0px rgba(0,0,0,0.3);\n}\n\n.nr-dashboard-theme ui-card-panel p.nr-dashboard-cardtitle {\n    color: #0094ce;\n    font-weight: bold;\n}\n\n.nr-dashboard-theme .nr-dashboard-template {\n    background-color: #F9F3DF;\n    text-align: center;\n}\n\nbody.nr-dashboard-theme md-content md-card {\n    background-color: #F9F3DF;\n    color: #111111;\n    text-align: center;\n}\n\n.nr-dashboard-template p, .nr-dashboard-template h1, .nr-dashboard-template h2, .nr-dashboard-template h3, .nr-dashboard-template h4 {\n    color: #111111 !important;\n    background-color: #F9F3DF !important;\n    text-align: center;\n}\n\n.nr-dashboard-theme ui-card-panel {\n    margin: 50px;\n    background-color: #B5DEFF;\n    border: 6px solid #0094ce;\n    border-radius: 20px;\n}\n\nbody.nr-dashboard-theme md-content md-card {\n    background-color: #B5DEFF;\n    border-radius: 20px;\n}\n\n.nr-dashboard-form .form-control-single > .nr-dashboard-form-button {\n    width: 100%;\n    font-size: 20px;\n    font-weight: bold;\n    display: inline-block;\n    cursor: pointer;\n    text-decoration: none;\n    overflow: hidden;\n    border-radius: 15px;\n    transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1);\n}\n\n\n</style>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "global",
+        "className": "",
+        "x": 120,
+        "y": 240,
+        "wires": [
+            [
+                "4ebbcee8d4718e5b"
+            ]
+        ]
+    },
+    {
+        "id": "05164d539a028979",
+        "type": "http in",
+        "z": "9d08267cc4663ca4",
+        "name": "",
+        "url": "/loginlog",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 350,
+        "y": 140,
+        "wires": [
+            [
+                "955b74165527f817"
+            ]
+        ]
+    },
+    {
+        "id": "cf91aabd93324ae0",
+        "type": "http response",
+        "z": "9d08267cc4663ca4",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 650,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "8d68f2351fb12991",
+        "type": "comment",
+        "z": "9d08267cc4663ca4",
+        "name": "/loginlog permite ver el log de consola",
+        "info": "",
+        "x": 370,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "6968511fd68ace4c",
+        "type": "comment",
+        "z": "9d08267cc4663ca4",
+        "name": "estilos para dashboard",
+        "info": "",
+        "x": 120,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9b7867e9abda0ad5",
+        "type": "comment",
+        "z": "9d08267cc4663ca4",
+        "name": "lógica",
+        "info": "",
+        "x": 490,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "09a2ae2bb1c98eb0",
+        "type": "comment",
+        "z": "9d08267cc4663ca4",
+        "name": "devuelve la información del chequeador",
+        "info": "",
+        "x": 830,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "5e5605cf08507471",
+        "type": "comment",
+        "z": "9d08267cc4663ca4",
+        "name": "controla el mensaje de log",
+        "info": "",
+        "x": 770,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "b00ef23e3fc0e948",
+        "type": "ui_group",
+        "name": "Loguéate para acceder",
+        "tab": "1d36736c1dfc6bd4",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3d9e45e.bcd50ba",
+        "type": "ui_group",
+        "name": "Radial Gauges",
+        "tab": "e625ce36.34cf3",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "1d36736c1dfc6bd4",
+        "type": "ui_tab",
+        "name": "Login by le4nnt0nn",
+        "icon": "'fa fa-sign-in'",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "e625ce36.34cf3",
+        "type": "ui_tab",
+        "name": "Widgets",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": true
+    }
+]
