@@ -14,8 +14,15 @@ El usuario a introducir es **antonio** y la contraseña **dwes**.
 * Uso de CSS para la interfaz
 * Campos de usuario y contraseña
 * Botón para entrar
-* Si escribes en la barra http://localhost:1880/loginlog puedes ver el log del login
+* Si escribes en la barra http://localhost:1880/loginlog puedes ver en raw la respuesta del login
 ---
+### 💻 Instalar Dashboard
+
+Si no funciona, instalar el dashboard en tu nodeRED:
+
+> npm install node-red-dashboard
+
+Una vez instalado ya podrás importar **logueo.json**.
 
 ### ❓ Cómo abrir ventana Dashboard
 
