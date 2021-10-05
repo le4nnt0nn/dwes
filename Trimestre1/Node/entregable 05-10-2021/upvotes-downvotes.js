@@ -15,8 +15,8 @@ const votes3 = {
 
 function getVoteCount(ob1) {
     return ob1.upvotes-ob1.downvotes
-}
+};
 
-console.log(getVoteCount(votes1))
-console.log(getVoteCount(votes2))
-console.log(getVoteCount(votes3))
+console.log(getVoteCount(votes1));
+console.log(getVoteCount(votes2));
+console.log(getVoteCount(votes3));
