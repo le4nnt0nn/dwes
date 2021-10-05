@@ -10,4 +10,11 @@
 
 ---
 ##### Oddish vs. Evenish
+
 `Cuando la suma de sus cifras es impar, Oddish. En caso de par, Evenish.`
+
+---
+
+##### Dance for Cash
+
+`El usuario debe introducir su pin y este será devuelto en forma de pasos de baile.`
