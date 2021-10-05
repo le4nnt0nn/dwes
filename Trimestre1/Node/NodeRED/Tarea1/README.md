@@ -22,6 +22,16 @@ Si no funciona, instalar el dashboard en tu nodeRED:
 
 > npm install node-red-dashboard
 
+También hay otra forma de instalar dashboard de manera más gráfica:
+
+* Hacer click en **Manage palette**
+
+![paso1](./docs/pas1.png "Paso 1")
+
+* Buscar **node-red-dashboard** y click en instalar
+
+![paso2](./docs/pas2.png "Paso 2")
+
 Una vez instalado ya podrás importar **logueo.json**.
 
 ### ❓ Cómo abrir ventana Dashboard
