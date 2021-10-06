@@ -23,10 +23,7 @@ console.log(invert(persona));
 function getStudentsWithNamesAndTopNotes(students) {
 	const array = students.map(function(obj){
     const maxNotaAlumno = {};
-    maxNotaAlumno[obj.name] = Math.max(parseInt(students.forEach(element => {
-      const values = Object.values(element);
-      return values;
-    })));
+    maxNotaAlumno[obj.name] = Math.max(...obj.notes)
     return maxNotaAlumno;
  });
  return array;
