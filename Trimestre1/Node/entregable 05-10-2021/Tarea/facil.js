@@ -7,11 +7,23 @@ const persona = {
     edad: 19,
 }
 
+// Transformar un objeto en un array, cada elemento será clave-valor:
 function toArray(obj) {
-	const propertyValues = Object.values(obj);
     const entries = Object.entries(obj);
 
     return entries;
 }
 
 console.log(toArray(persona));
+
+// Transformar un objeto en un array con dos elementos [claves, valores] :
+function keysAndValues(obj) {
+	const keys = Object.keys(obj);
+    const values = Object.values(obj);
+
+    let arrayDevuelto = [keys, values];
+
+    return arrayDevuelto;
+}
+
+console.log(keysAndValues(persona));
