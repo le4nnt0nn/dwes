@@ -7,8 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "@comment custom": "Creado script propio",
     "custom": "echo Esto es un mensaje custom",
-    "@comment start": "Al introducir start se ejecutará nodemon",
-    "start": "nodemon index.js"
+    "@comment start": "Al introducir start se ejecutará index.js",
+    "start": "node index.js",
+    "@comment dev": "Al introducir start se ejecutará nodemom",
+    "dev": "nodemon index.js",
+    "@comment clear": "Limpia el proyecto",
+    "clear:modules": "rimraf **/node_modules",
+    "clear:locks": "rimraf **/package-lock.json",
+    "clear": "npm run clear:modules && npm run clear:locks"
   },
   "author": "",
   "license": "ISC",
