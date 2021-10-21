@@ -1,0 +1,21 @@
+{
+  "name": "tarea3",
+  "version": "1.0.0",
+  "description": "Crear serie de scripts con el prefijo crear que cree ficheros y carpetas dentro de la carpeta files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "@comment crear": "Crea carpeta files",
+    "crear": "mkdir files",
+    "@comment crear:js": "Crea fichero js con nombre por argumentos",
+    "crear:js": "touch $FILENAME",
+    "@comment crear:carpeta": "Crea carpeta con nombre por argumentos",
+    "crear:carpeta": "mkdir $FOLDERNAME",
+    "@comment borrar": "Borra la carpeta files completamente",
+    "borrar": "rm -rf ./files",
+    "@comment borrar:js": "Borra todos los ficheros js de la carpeta files",
+    "borrar:js": "rm ./files/*.js"
+  },
+  "author": "Antonio Cortes",
+  "license": "ISC"
+}
