@@ -14,7 +14,9 @@
     "@comment clear": "Limpia el proyecto",
     "clear:modules": "rimraf **/node_modules",
     "clear:locks": "rimraf **/package-lock.json",
-    "clear": "npm run clear:modules && npm run clear:locks"
+    "clear": "npm run clear:modules && npm run clear:locks",
+    "clear:env": "rimraf **/.env",
+    "copy:env": "for d in workspaces/*; do cp ${d}/.env.template ${d}/.env; done"
   },
   "author": "",
   "license": "ISC",
