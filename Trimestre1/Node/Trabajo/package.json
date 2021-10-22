@@ -1,0 +1,15 @@
+{
+  "name": "editor-notas",
+  "version": "1.0.0",
+  "description": "Editor que permite crear, editar o eliminar una nota",
+  "main": "index.js",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Antonio Cortés - (le4nnt0nn)",
+  "license": "ISC"
+}
