@@ -4,7 +4,13 @@
   "description": "Realizar programa y scripts para imprimir un argumento pasado en colores",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "@comment imprime:azul": "Imprime en azul",
+    "imprime:azul": "node -e 'require(\"./index.js\").impresorBlue()'",
+    "@comment imprime:rojo": "Imprime en rojo",
+    "imprime:rojo": "node -e 'require(\"./index.js\").impresorRed()'",
+    "@comment imprime:verde": "Imprime en verde",
+    "imprime:verde": "node -e 'require(\"./index.js\").impresorGreen()'"
   },
   "author": "Antonio Cortes",
   "license": "ISC",
