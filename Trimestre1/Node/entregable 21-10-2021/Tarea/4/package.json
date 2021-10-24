@@ -1,0 +1,11 @@
+{
+  "name": "tarea4",
+  "version": "1.0.0",
+  "description": "Realizar programa y scripts para imprimir un argumento pasado en colores",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Antonio Cortes",
+  "license": "ISC"
+}
