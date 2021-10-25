@@ -4,9 +4,8 @@
   "description": "Editor que permite crear, editar o eliminar una nota",
   "main": "index.js",
   "dependencies": {
-    "prompt-sync": "^4.2.0"
+    "prompt-sync": "^4.1.6"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
