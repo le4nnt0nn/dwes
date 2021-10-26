@@ -7,7 +7,12 @@
     "prompt-sync": "^4.1.6"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "@comment crear": "Crea una nota",
+    "crear": "node index.js 1",
+    "@comment edita": "Edita una nota",
+    "editar": "node index.js 2",
+    "@comment eliminar": "Elimina una nota",
+    "eliminar": "node index.js 3"
   },
   "author": "Antonio Cortés - (le4nnt0nn)",
   "license": "ISC"
