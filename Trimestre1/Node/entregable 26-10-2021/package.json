@@ -1,0 +1,18 @@
+{
+  "name": "debug-clase",
+  "version": "1.0.0",
+  "description": "Debuggeando en clase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "inspect": "node --inspect index.js",
+    "start": "node index.js"
+  },
+  "author": "Antonio Cortés",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "got": "^11.8.2",
+    "node-fetch": "^3.0.0"
+  }
+}
