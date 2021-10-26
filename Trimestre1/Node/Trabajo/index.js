@@ -12,9 +12,7 @@ const prompt = require("prompt-sync")();
 
 const arg = process.argv;
 
-// TODO - NO PUEDE LEER LENGTH DE UNDEFINDED, RESOLVER
-
-if (arg[2].length != null && !undefined) {
+if (arg[2] != null && !undefined) {
     switch (arg[2]) {
         case "1":
             try {
