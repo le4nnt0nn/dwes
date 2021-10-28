@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
   "compose:test": "docker-compose -f docker-compose.test.yml up -d",
-  "test": "cross-env NODE_ENV=test nyc ava",
-  "test:html": "cross-env NODE_ENV=test nyc --reporter=html ava",
-  "test:watch": "cross-env NODE_ENV=test ava --watch --verbose",
-  "test:report": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-lcov ava || echo 1; node test/sonar.js",
- "test:purge": "rm -r .nyc_output .scannerwork coverage"
+  "test": "nyc ava",
+  "test:html": "nyc --reporter=html ava",
+  "test:watch": "ava --watch --verbose",
+  "test:report": "nyc --reporter=lcov --reporter=text-lcov ava || echo 1; node test/sonar.js",
+  "test:purge": "rm -r .nyc_output .scannerwork coverage"
  },
  "keywords": [],
  "author": "",
