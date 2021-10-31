@@ -1,0 +1,20 @@
+{
+  "name": "tarea3",
+  "version": "1.0.0",
+  "description": "test realizados de ejemplos con JEST",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Antonio Cortés",
+  "license": "ISC",
+  "devDependencies": {
+    "docker-compose": "^0.23.13",
+    "jest": "^27.3.1",
+    "nyc": "^15.1.0",
+    "sonarqube-scanner": "^2.8.1"
+  }
+}
