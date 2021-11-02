@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // Ejecuta el archivo actual del editor
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Current Opened File",
+            "program": "${file}"
+        },
+        {   
+            // Ejecuta siempre el index
+            "name": "Launch Program",
+            "program": "${workspaceFolder}/index.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        }
+    ]
+}

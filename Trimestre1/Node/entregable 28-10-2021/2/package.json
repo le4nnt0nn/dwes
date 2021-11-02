@@ -1,0 +1,21 @@
+{
+  "name": "ejercicio2",
+  "version": "1.0.0",
+  "description": "Comparar dos fechas con test",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc ava",
+    "test:html": "nyc --reporter=html ava",
+    "test:watch": "ava --watch --verbose",
+    "test:report": "nyc --reporter=lcov --reporter=text-lcov ava || echo 1; node test/sonar.js",
+    "test:purge": "rm -r .nyc_output .scannerwork coverage"
+  },
+  "author": "Antonio Cortes",
+  "license": "ISC",
+  "dependencies": {
+    "luxon": "^2.0.2"
+  },
+  "devDependencies": {
+    "ava": "^3.15.0"
+  }
+}
