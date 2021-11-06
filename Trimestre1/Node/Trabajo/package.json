@@ -12,8 +12,19 @@
     "@comment edita": "Edita una nota",
     "editar": "node index.js 2",
     "@comment eliminar": "Elimina una nota",
-    "eliminar": "node index.js 3"
+    "eliminar": "node index.js 3",
+    "@comment eslint": "Arrancar eslint",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "eslint --fix --ignore-path .gitignore ."
   },
   "author": "Antonio Cortés - (le4nnt0nn)",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-ava": "^13.1.0",
+    "eslint-plugin-import": "^2.25.2",
+    "nodemon": "^2.0.14"
+  }
 }
