@@ -2,16 +2,23 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-const object = {1 : 'valor', 2: 'valor', 3:'valor'}
-const entradas = Object.entries(object);
-// TODO - HACER EJERCICIO
+const ob = {1 : 'valor', 2: 'valor', 3:'valor'}
+const entradas = Object.entries(ob);
+let list = [];
+
+function genList() {
+  for (const key in entradas) {
+    console.log(`${entradas[key]}`);  
+    list.push(`<li>${entradas[key]}</li>`)
+  }
+}
+
+genList()
+
 app.get(`/body/:object`, function (req, res) {
-    const entradas2 = Object.entries(req.params.object)
-    console.log(entradas);
-    for (let index = 0; index < entradas.length; index++) {
-      console.log(index)
-      res.send(`<li>${entradas[index]}</li>`)
-    }
+  console.log('object = '+entradas)
+  console.log('length = '+entradas.length)
+  return res.send(`Tu objeto está aqui! ${list}`)
 });
 
 app.get('/:', (req, res) => {
