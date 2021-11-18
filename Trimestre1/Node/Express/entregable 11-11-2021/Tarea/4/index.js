@@ -15,7 +15,7 @@ function genList() {
 
 genList()
 
-app.get(`/body/:object`, function (req, res) {
+app.get(`/body`, function (req, res) {
   console.log('object = '+entradas)
   console.log('length = '+entradas.length)
   return res.send(`Tu objeto está aqui! ${list}`)
