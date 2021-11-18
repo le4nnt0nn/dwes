@@ -1,0 +1,17 @@
+{
+  "name": "ej1",
+  "version": "1.0.0",
+  "description": "Estructura base de ejmplo con /ping respondiendo pong",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Antonio Cortés",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
