@@ -41,17 +41,15 @@ function editUser(req, res) {
 
 function removeUser(req, res) {
     const id = req.params.id
-    for (let user of users) {
+    users.filter(user => {
         if (user.id === id) {
             const index = users.indexOf(user);
             users.splice(index, 1);
-            res.status(200).send('Removed user')
-            logger.info('OK - Removed User')
-            return;
         }
-    }
-    res.status(404).send('User not found');
-    logger.warn('WARN - User not found')
+    });
+
+    res.send('User is deleted');
+    logger.info('OK - Removed User')
 }
 
 module.exports = {

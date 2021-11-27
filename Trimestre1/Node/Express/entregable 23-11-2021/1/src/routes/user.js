@@ -17,9 +17,9 @@ router.get('/users/remove/:id', removeUser) */
 
 router.get('/users', showUsers);
 router.get('/users/:id', showUser)
-router.post('/users/add/:object', addUser)
+router.post('/users/id, addUser)
 router.put('/users/edit/:id/:object', editUser)
-router.delete('/users/remove/:id', removeUser)
+router.delete('/users/:id', removeUser)
 
 
 module.exports = router;

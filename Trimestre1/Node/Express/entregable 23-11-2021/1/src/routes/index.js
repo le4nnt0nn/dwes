@@ -20,6 +20,6 @@ router.get('/users', userRouter);
 router.get('/users/:id', userRouter);
 router.post('/users/add/:object', userRouter);
 router.put('/users/edit/:id/:object', userRouter);
-router.delete('/users/remove/:id', userRouter)
+router.delete('/users/:id', userRouter)
 
 module.exports = router;
