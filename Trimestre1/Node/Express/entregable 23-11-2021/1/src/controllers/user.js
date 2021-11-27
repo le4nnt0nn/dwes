@@ -50,6 +50,8 @@ function removeUser(req, res) {
             return;
         }
     }
+    res.status(404).send('User not found');
+    logger.warn('WARN - User not found')
 }
 
 module.exports = {
