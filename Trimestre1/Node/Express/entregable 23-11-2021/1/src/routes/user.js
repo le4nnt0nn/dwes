@@ -17,8 +17,8 @@ router.get('/users/remove/:id', removeUser) */
 
 router.get('/users', showUsers);
 router.get('/users/:id', showUser)
-router.post('/users/id, addUser)
-router.put('/users/edit/:id/:object', editUser)
+router.post('/users/', addUser)
+router.put('/users/:id', editUser)
 router.delete('/users/:id', removeUser)
 
 
