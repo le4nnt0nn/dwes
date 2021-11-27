@@ -7,13 +7,19 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "author": "Antonio Cortés",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "jest": "^27.3.1",
+    "newman": "^5.3.0",
     "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "sinon": "^12.0.1",
+    "superagent": "^6.1.0",
+    "supertest": "^6.1.6"
   }
 }
