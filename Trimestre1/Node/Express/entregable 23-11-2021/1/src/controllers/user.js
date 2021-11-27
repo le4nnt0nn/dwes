@@ -20,9 +20,13 @@ function showUser(req, res) {
     logger.warn('WARN - User not found')
 }
 
-function addUser() {
-    const user = req.params.object
+
+function addUser(req, res) {
+    const param = req.params.object
+    const user = JSON.parse(param)
+    console.log(user)
     users.push(user)
+    console.log(users)
     res.status(200).send()
     logger.info('OK - Added User')
 }
