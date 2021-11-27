@@ -18,7 +18,7 @@ router.get('/users/remove/:id', userRouter); */
 router.get('/', rootController);
 router.get('/users', userRouter);
 router.get('/users/:id', userRouter);
-router.post('/users/:id', userRouter);
+router.post('/users', userRouter);
 router.put('/users/:id', userRouter);
 router.delete('/users/:id', userRouter)
 

@@ -27,6 +27,11 @@ function addUser(req, res) {
     users.push(user)
     res.status(200).send('Created user')
     logger.info('OK - Added User') */
+
+    const newUser = req.body
+    users.push(newUser)
+    res.status(200).send('Created user')
+    logger.info('OK - Added User')
 }
 
 function editUser(req, res) {
