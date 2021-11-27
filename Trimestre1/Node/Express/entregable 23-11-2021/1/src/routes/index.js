@@ -9,5 +9,6 @@ router.get('/', rootController);
 router.get('/users', userRouter);
 router.get('/users/:id', userRouter);
 router.get('/users/add/:object', userRouter);
+router.get('/users/edit/:id/:object', userRouter);
 
 module.exports = router;
