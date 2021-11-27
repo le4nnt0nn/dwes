@@ -7,5 +7,7 @@ const router = express.Router();
 
 router.get('/', rootController);
 router.get('/users', userRouter);
+router.get('/users/:id', userRouter);
+router.get('/users/add/:object', userRouter);
 
 module.exports = router;
