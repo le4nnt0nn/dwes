@@ -39,10 +39,17 @@ function editUser(req, res) {
     logger.info('OK - Modified User')
 }
 
-//TODO
-function removeUser(user) {
-    res.status(200).send()
-    logger.info('OK - Removed User')
+function removeUser(req, res) {
+    const id = req.params.id
+    for (let user of users) {
+        if (user.id === id) {
+            const index = users.indexOf(user);
+            users.splice(index, 1);
+            res.status(200).send('Removed user')
+            logger.info('OK - Removed User')
+            return;
+        }
+    }
 }
 
 module.exports = {
@@ -50,4 +57,5 @@ module.exports = {
     showUser,
     addUser,
     editUser,
+    removeUser,
 };
