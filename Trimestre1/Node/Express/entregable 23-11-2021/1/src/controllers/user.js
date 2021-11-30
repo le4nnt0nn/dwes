@@ -11,13 +11,12 @@ function showUser(req, res) {
     console.log(id)
     for (let user of users) {
         if (user.id === id) {
-            res.status(200).send(user);
-            logger.info('OK - Show User')
-            return;
+            logger.info('OK - Show User');
+            return res.status(200).send(user);
         }
     }
-    res.status(404).send('User not found');
     logger.warn('WARN - User not found')
+    return res.status(404).send({ message: 'User not found' });
 }
 
 function addUser(req, res) {
