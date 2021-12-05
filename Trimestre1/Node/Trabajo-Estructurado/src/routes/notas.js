@@ -1,9 +1,9 @@
 const express = require('express');
 
-const { notasController } = require('../controllers/notas');
+const { showNote } = require('../controllers/notas');
 
 const router = express.Router();
 
-router.get('/notas', notasController);
+router.get('/notas', showNote);
 
 module.exports = router;
