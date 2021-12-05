@@ -12,11 +12,11 @@ const rl = readline.createInterface({
     output: process.stdout,
 }); */
 
-function showNote(req, res) {
-    res.status(200)
-    res.send(findNotes())
+function showNotes(req, res) {
+    res.status(200).send(findNotes())
+    
 }
 
 module.exports = {
-    showNote,
+    showNotes,
 }
