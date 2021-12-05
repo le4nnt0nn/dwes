@@ -18,8 +18,11 @@ router.get('/users/remove/:id', removeUser) */
 
 router.get('/users', authJWT, showUsers);
 router.get('/users/:id', showUser);
+// Cualquier usuario
 router.get('/public', itsPublic);
+// Sólo usuarios registrados
 router.get('/vip', authJWT, itsVip);
+// Sólo usuarios con rol admin
 router.get('/admin', authJWT, itsAdmin);
 router.post('/login', loginUser);
 /* router.post('/users', addUser)

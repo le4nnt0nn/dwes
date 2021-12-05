@@ -84,6 +84,7 @@ function loginUser(req, res) {
     }
 }
 
+// Cualquier usuario
 function itsPublic(req, res) {
     /* const { role } = req.user;
 
@@ -94,16 +95,19 @@ function itsPublic(req, res) {
     res.send('GUEST - Welcome guest user, why you don´t have an account?')
 }
 
+// Usuarios registrados
 function itsVip(req, res) {
-    const { role } = req.user;
+    // Sólo si queremos usar rol vip
+    /* const { role } = req.user;
 
     if(role !== 'vip') {
         return res.sendStatus(403);
-    }
+    } */
 
     res.send('VIP - Welcome registered user')
 }
 
+// Sólo usuarios con rol admin
 function itsAdmin(req, res) {
     const { role } = req.user;
 
