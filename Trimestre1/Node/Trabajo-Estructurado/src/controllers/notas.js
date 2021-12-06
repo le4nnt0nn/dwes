@@ -1,5 +1,5 @@
 const { logger } = require("../utils");
-const { findNotes, findContentNotes, currentNotes, addNoteDir } = require('../utils/dir')
+const { findNotes, currentNotes, addNoteDir } = require('../utils/dir')
 const path = require('path');
 const fs = require("fs")
 const { readFile } = require("fs/promises");
@@ -49,14 +49,30 @@ async function showNote(req, res) {
 }
 
 async function addNote(req, res) {
-    const name = req.params.name
-    const content = req.body
-    console.log(content.content)
-    addNoteDir(name, content.content).then(res.status(200).send('Nota creada'))
+    const name = req.params.name;
+    const content = req.body;
+    addNoteDir(name, content.content).then(res.status(200).send('Nota creada'));
+}
+
+async function editNote(req, res) {
+    const id = req.params.id;
+    const newContent = req.body;
+    await findNotes().then(async function(notes){
+        for (let index = 0; index <= notes.length; index++) {
+            if(index==id) {
+                fs.writeFileSync(`${currentNotes}/notes/${notes[index]}`, newContent.content, function(err){
+                    if(err) throw err;
+                })
+               // finded = {name: notes[index], content: noteContent}
+            }
+        }
+        return res.status(200).send('Nota editada')
+    })
 }
 
 module.exports = {
     showNotes,
     showNote,
     addNote,
+    editNote,
 }
