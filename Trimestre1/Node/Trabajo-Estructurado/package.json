@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "fs-promise": "^2.0.3",
     "glob": "^7.2.0",
     "path": "^0.12.7",
     "prompt-sync": "^4.2.0",
