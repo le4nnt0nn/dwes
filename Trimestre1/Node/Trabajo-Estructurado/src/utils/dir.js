@@ -1,18 +1,13 @@
-const fs = require("fs");
+const fs = require("fs/promises");
 
 const folderName = 'notes';
 var allNotes = [];
+let files;
 
-function findNotes() {
-    fs.readdir(`${__dirname}/${folderName}`, (err, files) => {
-        files.forEach(file => {
-            console.log(file)
-            allNotes.push(file);
-        });
-    });
-    return allNotes;
+async function findNotes() {
+    files = await fs.readdir(`${__dirname}/${folderName}`)
+    return files;
 };
-console.log(allNotes)
 
 module.exports = {
     findNotes,
