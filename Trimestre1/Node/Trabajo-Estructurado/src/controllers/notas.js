@@ -37,12 +37,6 @@ async function showNote(req, res) {
     let finded;
     // Manda cada uno de las notas
     await findNotes().then(async function(notes){
-        /**
-         * await notes.forEach(note => {
-            let noteContent = fs.readFileSync(`${currentNotes}/notes/${note}`, 'utf-8')
-            finded = { name: note, content: noteContent }
-        })
-         */
         for (let index = 0; index <= notes.length; index++) {
             if(index==id) {
                 let noteContent = fs.readFileSync(`${currentNotes}/notes/${notes[index]}`, 'utf-8')
