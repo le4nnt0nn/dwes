@@ -14,9 +14,11 @@ const rl = readline.createInterface({
     output: process.stdout,
 }); */
 
+let allNotes = [];
+
+
 // Muestra todas las notas
 async function showNotes(req, res) {
-    let allNotes = [];
     // Manda cada uno de las notas
     await findNotes().then(async function(notes){
         await notes.forEach(note => {
@@ -25,21 +27,31 @@ async function showNotes(req, res) {
         })
         return res.send(allNotes)
     })
-    //findContentNotes('one.note').then( val => res.send(val))
     return res.status(200)
     
 }
 
 // Muestra la nota seleccionada por nombre
-function showNote(req, res) {
-    const name = `${req.params.name}.note`
+async function showNote(req, res) {
+    const id = req.params.id
     let finded;
     // Manda cada uno de las notas
-    findNotes().then(val => val.includes(name) ?
-         res.send(Object.values(val).filter(v => v === name)) : 
-         res.status(404).send({ message: 'Nota no encontrada' }));
+    await findNotes().then(async function(notes){
+        /**
+         * await notes.forEach(note => {
+            let noteContent = fs.readFileSync(`${currentNotes}/notes/${note}`, 'utf-8')
+            finded = { name: note, content: noteContent }
+        })
+         */
+        for (let index = 0; index <= notes.length; index++) {
+            if(index==id) {
+                let noteContent = fs.readFileSync(`${currentNotes}/notes/${notes[index]}`, 'utf-8')
+                finded = {name: notes[index], content: noteContent}
+            }
+        }
+        return res.send(finded)
+    })
     return res.status(200)
-    
 }
 
 module.exports = {
