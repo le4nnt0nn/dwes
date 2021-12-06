@@ -8,5 +8,6 @@ router.get('/notas', showNotes);
 router.get('/notas/:id', showNote);
 router.post('/notas/:name', addNote);
 router.put('/notas/:id', editNote);
+router.delete('/notas/:id', removeNote);
 
 module.exports = router;
