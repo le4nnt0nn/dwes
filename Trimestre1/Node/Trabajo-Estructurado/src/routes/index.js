@@ -8,5 +8,6 @@ const router = express.Router();
 router.get('/', rootController);
 router.get('/notas', notasRouter);
 router.get('/notas/:id', notasRouter);
+router.post('/notas/:name', notasRouter);
 
 module.exports = router;

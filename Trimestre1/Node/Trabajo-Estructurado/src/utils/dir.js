@@ -16,8 +16,15 @@ async function findContentNotes(f) {
     return content;
 }
 
+async function addNoteDir(name, content) {
+    fs.writeFile(`${__dirname}/${folderName}/${name}.note`, content, function(err){
+        if(err) throw err;
+    })
+}
+
 module.exports = {
     findNotes,
     currentNotes,
     findContentNotes,
+    addNoteDir,
 }

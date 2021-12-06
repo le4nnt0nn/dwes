@@ -1,5 +1,5 @@
 const { logger } = require("../utils");
-const { findNotes, findContentNotes, currentNotes } = require('../utils/dir')
+const { findNotes, findContentNotes, currentNotes, addNoteDir } = require('../utils/dir')
 const path = require('path');
 const fs = require("fs")
 const { readFile } = require("fs/promises");
@@ -48,7 +48,15 @@ async function showNote(req, res) {
     return res.status(200)
 }
 
+async function addNote(req, res) {
+    const name = req.params.name
+    const content = req.body
+    console.log(content.content)
+    addNoteDir(name, content.content).then(res.status(200).send('Nota creada'))
+}
+
 module.exports = {
     showNotes,
     showNote,
+    addNote,
 }
