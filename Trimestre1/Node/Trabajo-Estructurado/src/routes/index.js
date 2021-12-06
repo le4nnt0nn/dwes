@@ -9,5 +9,6 @@ router.get('/', rootController);
 router.get('/notas', notasRouter);
 router.get('/notas/:id', notasRouter);
 router.post('/notas/:name', notasRouter);
+router.put('/notas/:id', notasRouter);
 
 module.exports = router;
