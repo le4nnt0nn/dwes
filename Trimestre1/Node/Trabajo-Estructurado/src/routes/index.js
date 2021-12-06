@@ -7,5 +7,6 @@ const router = express.Router();
 
 router.get('/', rootController);
 router.get('/notas', notasRouter);
+router.get('/notas/:name', notasRouter);
 
 module.exports = router;
