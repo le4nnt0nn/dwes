@@ -1,6 +1,7 @@
 const { logger } = require("../utils");
 const { findNotes } = require('../utils/dir')
 const path = require('path');
+const { readdir } = require("fs");
 
 // Readline
 // const readline = require("readline");
@@ -13,7 +14,9 @@ const rl = readline.createInterface({
 }); */
 
 function showNotes(req, res) {
-    res.status(200).send(findNotes())
+    // Manda cada uno de las notas
+    findNotes().then(val => res.send(val))
+    res.status(200)
     
 }
 
