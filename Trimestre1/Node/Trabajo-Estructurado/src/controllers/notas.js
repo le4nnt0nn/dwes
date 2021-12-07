@@ -1,8 +1,11 @@
 const { logger } = require("../utils");
-const { findNotes, currentNotes, addNoteDir } = require('../utils/dir')
+const { findNotes, currentNotes, addNoteDir } = require('../utils/dir');
+const { envToken, users } = require('../utils/stored');
+const jwt = require('jsonwebtoken');
 const path = require('path');
 const fs = require("fs")
 const { readFile } = require("fs/promises");
+require('dotenv').config({ path: '../../.env' });
 
 
 let allNotes = [];
@@ -10,16 +13,16 @@ let allNotes = [];
 // Muestra todas las notas
 async function showNotes(req, res) {
     // Manda cada uno de las notas
-    await findNotes().then(async function(notes){
+    await findNotes().then(async function (notes) {
         await notes.forEach(note => {
             let noteContent = fs.readFileSync(`${currentNotes}/notes/${note}`, 'utf-8')
-            allNotes.push({name: note, content: noteContent})
+            allNotes.push({ name: note, content: noteContent })
         })
         return res.send(allNotes)
     })
     logger.info('OK - Notas disponibles mostradas');
     return res.status(200)
-    
+
 }
 
 // Muestra la nota seleccionada por nombre
@@ -27,11 +30,11 @@ async function showNote(req, res) {
     const id = req.params.id
     let finded;
     // Manda cada uno de las notas
-    await findNotes().then(async function(notes){
+    await findNotes().then(async function (notes) {
         for (let index = 0; index <= notes.length; index++) {
-            if(index==id) {
+            if (index == id) {
                 let noteContent = fs.readFileSync(`${currentNotes}/notes/${notes[index]}`, 'utf-8')
-                finded = {name: notes[index], content: noteContent}
+                finded = { name: notes[index], content: noteContent }
             }
         }
         return res.send(finded)
@@ -51,11 +54,11 @@ async function addNote(req, res) {
 async function editNote(req, res) {
     const id = req.params.id;
     const newContent = req.body;
-    await findNotes().then(async function(notes){
+    await findNotes().then(async function (notes) {
         for (let index = 0; index <= notes.length; index++) {
-            if(index==id) {
-                fs.writeFileSync(`${currentNotes}/notes/${notes[index]}`, newContent.content, function(err){
-                    if(err) throw err;
+            if (index == id) {
+                fs.writeFileSync(`${currentNotes}/notes/${notes[index]}`, newContent.content, function (err) {
+                    if (err) throw err;
                 });
             };
         };
@@ -67,19 +70,50 @@ async function editNote(req, res) {
 // Elimina una nota, cuya id se pasa por parámetro
 async function removeNote(req, res) {
     const id = req.params.id;
-    await findNotes().then(async function(notes){
+    await findNotes().then(async function (notes) {
         for (let index = 0; index <= notes.length; index++) {
-            if(index==id) {
-                fs.unlinkSync(`${currentNotes}/notes/${notes[index]}`, function(err){
-                    if(err) throw err;
+            if (index == id) {
+                fs.unlinkSync(`${currentNotes}/notes/${notes[index]}`, function (err) {
+                    if (err) throw err;
                 });
             }
         };
         logger.info('OK - Nota eliminada');
         return res.status(200).send('Nota eliminada');
     });
-    
+
 }
+
+
+ function loginUser(req, res) {
+    const { username, password } = req.body;
+    const user = users.find(async u => { return u.username === username && u.password === password });
+    console.log(user)
+    console.log(envToken)
+    if(user) {
+       const accessToken = jwt.sign({username: user.username, role: user.role}, envToken);
+       return res.json({
+            accessToken
+        });
+    } else {
+       return res.send('User or password incorrect')
+    }
+  
+
+    /**
+     * await users.forEach(async user => {
+        if (user.username == username && user.password == password) {
+            const accessToken = await jwt.sign({ username: user.username, role: user.role }, envToken);
+            console.log(user.username)
+            return res.send({
+                accessToken
+            });
+        }
+        return res.send('User or password incorrect')
+    })
+     */
+}
+
 
 module.exports = {
     showNotes,
@@ -87,4 +121,5 @@ module.exports = {
     addNote,
     editNote,
     removeNote,
+    loginUser,
 }
