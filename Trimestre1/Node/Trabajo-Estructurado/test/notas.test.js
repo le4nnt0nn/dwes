@@ -1,6 +1,5 @@
-const sinon = require('sinon');
-const { showNote } = require('../src/controllers/notas');
-
+const fs = require("fs").promises;
+const { showNotes, showNote } = require("../src/controllers/notas");
 
 const mockReq = (id) => ({
     params: {
@@ -9,31 +8,40 @@ const mockReq = (id) => ({
 });
 
 const mockRes = () => ({
-    status: function(s) { this.statusCode=s; return this; },
+    status: function (s) { this.statusCode = s; return this; },
     statusCode: 200,
-    send: function(b) { this.body=b; return this;},
+    send: function (b) { this.body = b; return this; },
 });
 
-describe('getNoteById 200 Ok', () => {
-    it('should getNoteById', (done) => {
-        const noteId = '1';
-        const callback = sinon.stub();
-        const res = showNote(mockReq(noteId), mockRes());
-        console.log(JSON.stringify(res, null, 2));
-        //expect(res.statusCode).toBe(200);
-        expect(res.statusCode).toEqual(200)
-        //expect(res.body.id).toBe(noteId);
-        done();
+describe('showNotes', () => {
+    test('should 200', async () => {
+        const req = mockReq();
+        const res = mockRes();
+        await showNotes(req, res);
+        expect(res.statusCode).toEqual(200);
+    });
+    test('should 404', async () => {
+        const req = mockReq();
+        const res = mockRes();
+        await showNotes(req, res);
+        expect(res.statusCode).not.toEqual(404);
     });
 });
 
-describe('getNoteById Error 404', () => {
-    it('should getNoteById', (done) => {
-        const noteId = 123;
-        const callback = sinon.stub();
-        const res = showNote(mockReq(noteId), mockRes());
-        //expect(res.statusCode).toBe(404);
-        //expect(res.body.message).toBe('Nota no encontrada');
-        done();
+describe('showNote', () => {
+    test('should 200 and exists note', async () => {
+        const req = mockReq(1);
+        const res = mockRes();
+        await showNote(req, res);
+        expect(req.params.id).toEqual(1)
+        expect(res.statusCode).toEqual(200);
+    });
+    test('should 404 and doesn´t exists note', async () => {
+        const req = mockReq(5);
+        const res = mockRes();
+        await showNote(req, res);
+        expect(req.params.id).not.toEqual(1)
+        expect(res.statusCode).not.toEqual(404);
     });
 });
+
