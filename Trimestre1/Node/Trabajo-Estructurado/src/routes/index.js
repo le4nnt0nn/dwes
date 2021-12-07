@@ -11,5 +11,6 @@ router.get('/notas/:id', notasRouter);
 router.post('/notas/:name', notasRouter);
 router.put('/notas/:id', notasRouter);
 router.delete('/notas/:id', notasRouter);
+router.post('/login', notasRouter);
 
 module.exports = router;
