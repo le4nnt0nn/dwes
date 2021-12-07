@@ -48,12 +48,14 @@ async function showNote(req, res) {
     return res.status(200)
 }
 
+// Añade una nota, cuyo título se pasa como parámetro y contenido como body
 async function addNote(req, res) {
     const name = req.params.name;
     const content = req.body;
     addNoteDir(name, content.content).then(res.status(200).send('Nota creada'));
 }
 
+// Edita una nota, cuya id se pasa por parámetro y nuevo contenido como body
 async function editNote(req, res) {
     const id = req.params.id;
     const newContent = req.body;
@@ -62,12 +64,27 @@ async function editNote(req, res) {
             if(index==id) {
                 fs.writeFileSync(`${currentNotes}/notes/${notes[index]}`, newContent.content, function(err){
                     if(err) throw err;
-                })
-               // finded = {name: notes[index], content: noteContent}
-            }
-        }
-        return res.status(200).send('Nota editada')
-    })
+                });
+            };
+        };
+        return res.status(200).send('Nota editada');
+    });
+}
+
+// Elimina una nota, cuya id se pasa por parámetro
+async function removeNote(req, res) {
+    const id = req.params.id;
+    await findNotes().then(async function(notes){
+        for (let index = 0; index <= notes.length; index++) {
+            if(index==id) {
+                fs.unlinkSync(`${currentNotes}/notes/${notes[index]}`, function(err){
+                    if(err) throw err;
+                });
+            };
+        };
+        return res.status(200).send('Nota eliminada');
+    });
+    
 }
 
 module.exports = {
@@ -75,4 +92,5 @@ module.exports = {
     showNote,
     addNote,
     editNote,
+    removeNote,
 }
