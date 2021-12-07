@@ -4,18 +4,8 @@ const path = require('path');
 const fs = require("fs")
 const { readFile } = require("fs/promises");
 
-// Readline
-// const readline = require("readline");
-// const fs = require("fs").promises;
-
-/* 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-}); */
 
 let allNotes = [];
-
 
 // Muestra todas las notas
 async function showNotes(req, res) {
@@ -27,6 +17,7 @@ async function showNotes(req, res) {
         })
         return res.send(allNotes)
     })
+    logger.info('OK - Notas disponibles mostradas');
     return res.status(200)
     
 }
@@ -45,6 +36,7 @@ async function showNote(req, res) {
         }
         return res.send(finded)
     })
+    logger.info('OK - Nota disponible mostrada');
     return res.status(200)
 }
 
@@ -67,6 +59,7 @@ async function editNote(req, res) {
                 });
             };
         };
+        logger.info('OK - Nota editada');
         return res.status(200).send('Nota editada');
     });
 }
@@ -80,8 +73,9 @@ async function removeNote(req, res) {
                 fs.unlinkSync(`${currentNotes}/notes/${notes[index]}`, function(err){
                     if(err) throw err;
                 });
-            };
+            }
         };
+        logger.info('OK - Nota eliminada');
         return res.status(200).send('Nota eliminada');
     });
     
