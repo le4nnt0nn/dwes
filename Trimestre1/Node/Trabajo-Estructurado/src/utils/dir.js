@@ -3,11 +3,13 @@ require('dotenv').config({ path: '../../.env' });
 const { users } = require('../utils/stored')
 const jwt = require('jsonwebtoken');
 
+const envToken = process.env.ACCESS_TOKEN
+const jojo = "patata"
 const folderName = 'notes';
 var allNotes = [];
 let files;
 let content;
-let user;
+//let user;
 const currentNotes = __dirname;
 
 async function findNotes() {
@@ -26,23 +28,24 @@ async function addNoteDir(name, content) {
     })
 }
 
-async function findUser() {
-    const username = "antonio"
-    const password = "mypass"
-    user = users.find(async u => { return u.username === username && u.password === password });
+async function findUser(username, password) {
+    const user = await users.find(async u => {return console.log(u.username === username && u.password === password)});
     console.log(user)
-    if(user){
-        const access = jwt.sign({username: user.username}, process.env.ACCESS_TOKEN);
-        console.log(access)
-        return access
+    if(user) {
+        console.log('eziste')
+    } else {
+        console.log('no :(')
     }
+   // return user;
 }
 
-findUser()
+//findUser('gabri', 'cucu')
+findUser('antonio', 'mypass')
 
 module.exports = {
     findNotes,
     currentNotes,
     findContentNotes,
     addNoteDir,
+    findUser,
 }

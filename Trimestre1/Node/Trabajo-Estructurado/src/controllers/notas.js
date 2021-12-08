@@ -1,5 +1,5 @@
 const { logger } = require("../utils");
-const { findNotes, currentNotes, addNoteDir } = require('../utils/dir');
+const { findNotes, currentNotes, addNoteDir, findUser } = require('../utils/dir');
 const { envToken, users } = require('../utils/stored');
 const jwt = require('jsonwebtoken');
 const path = require('path');
@@ -85,19 +85,20 @@ async function removeNote(req, res) {
 }
 
 
- function loginUser(req, res) {
+async function loginUser(req, res) {
     const { username, password } = req.body;
-    const user = users.find(async u => { return u.username === username && u.password === password });
-    console.log(user)
-    console.log(envToken)
-    if(user) {
-       const accessToken = jwt.sign({username: user.username, role: user.role}, envToken);
-       return res.json({
-            accessToken
-        });
-    } else {
-       return res.send('User or password incorrect')
-    }
+    await findUser(username, password).then(async function(user) {
+        console.log(user)
+        if(user){
+            const access = await jwt.sign({username: user.username, role: user.role }, process.env.ACCESS_TOKEN);
+            console.log(access)
+            return res.send({
+                access
+            });
+        } else {
+            return res.send('User or password incorrect')
+        }
+    })
   
 
     /**
