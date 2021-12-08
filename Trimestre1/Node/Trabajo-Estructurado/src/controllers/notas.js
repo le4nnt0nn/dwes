@@ -84,35 +84,22 @@ async function removeNote(req, res) {
 
 }
 
-
+// Logueo de usuario para recibir token
 async function loginUser(req, res) {
     const { username, password } = req.body;
-    await findUser(username, password).then(async function(user) {
-        console.log(user)
-        if(user){
-            const access = await jwt.sign({username: user.username, role: user.role }, process.env.ACCESS_TOKEN);
-            console.log(access)
-            return res.send({
-                access
-            });
-        } else {
-            return res.send('User or password incorrect')
+    await findUser(username, password).then(async function (user) {
+        try {
+            if (user.username == process.env.ADMIN_USER) {
+                const access = await jwt.sign({ username: user.username }, process.env.ACCESS_TOKEN);
+                console.log(access)
+                return res.send({
+                    access
+                });
+            }
+        } catch (error) {
+            res.status(404).send('Usuario o contraseña inválida')
         }
     })
-  
-
-    /**
-     * await users.forEach(async user => {
-        if (user.username == username && user.password == password) {
-            const accessToken = await jwt.sign({ username: user.username, role: user.role }, envToken);
-            console.log(user.username)
-            return res.send({
-                accessToken
-            });
-        }
-        return res.send('User or password incorrect')
-    })
-     */
 }
 
 

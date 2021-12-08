@@ -29,18 +29,14 @@ async function addNoteDir(name, content) {
 }
 
 async function findUser(username, password) {
-    const user = await users.find(async u => {return console.log(u.username === username && u.password === password)});
-    console.log(user)
-    if(user) {
-        console.log('eziste')
-    } else {
-        console.log('no :(')
+    if(username == process.env.ADMIN_USER && password == process.env.ADMIN_PASSWORD) {
+        return {username: username, password: password};
     }
-   // return user;
+    
 }
 
 //findUser('gabri', 'cucu')
-findUser('antonio', 'mypass')
+//findUser('antonio', 'mypass')
 
 module.exports = {
     findNotes,
