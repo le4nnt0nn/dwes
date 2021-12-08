@@ -1,6 +1,7 @@
 const { logger } = require("../utils");
 const { findNotes, currentNotes, addNoteDir, findUser } = require('../utils/dir');
 const { envToken, users } = require('../utils/stored');
+const { filterObject, sortObject, paginateObject } = require('../utils/filter');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const fs = require("fs")
@@ -12,13 +13,43 @@ let allNotes = [];
 
 // Muestra todas las notas
 async function showNotes(req, res) {
+    // útiles
+    let isDesc = true;
+    const notesReverse = allNotes.reverse()
+    const notesToSort = allNotes
     // Manda cada uno de las notas
     await findNotes().then(async function (notes) {
+        const { name } = req.query;
+        const filters = { name };
         await notes.forEach(note => {
             let noteContent = fs.readFileSync(`${currentNotes}/notes/${note}`, 'utf-8')
             allNotes.push({ name: note, content: noteContent })
         })
-        return res.send(allNotes)
+        // TODO - Terminar filtro de notas
+        // filtro
+        const filteredNotes = filterObject(allNotes, filters);
+        console.log(filteredNotes)
+        
+
+        // TODO - Terminar sort (mismo problema)
+        // sort
+        if (Object.keys(req.query) == 'orderby' && Object.values(req.query) == 'name') {
+            const sortedNotes = sortObject(notesToSort)
+            return res.status(200).send(sortedNotes)
+        } else if (Object.keys(req.query) == 'orderby' && Object.values(req.query) == 'desc' && !isDesc) {
+            return res.status(200).send(notesReverse)
+        } else if (Object.keys(req.query) == 'orderby' && Object.values(req.query) == 'asc' && isDesc) {
+            return res.status(200).send(notesReverse)
+        }
+
+        // pagination
+        if (Object.keys(req.query) == 'limit') {
+            const paginatedNotes = paginateObject(allNotes, Object.values(req.query), 1)
+            return res.status(200).send(paginatedNotes)
+        }
+
+        //return res.status(200).send(filteredNotes)
+        return res.status(200).send(allNotes)
     })
     logger.info('OK - Notas disponibles mostradas');
     return res.status(200)
