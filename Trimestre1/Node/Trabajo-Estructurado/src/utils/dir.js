@@ -1,4 +1,4 @@
-const fs = require("fs/promises");
+const fs = require('fs');
 require('dotenv').config({ path: '../../.env' });
 const { users } = require('../utils/stored')
 const jwt = require('jsonwebtoken');
@@ -12,13 +12,13 @@ let content;
 //let user;
 const currentNotes = __dirname;
 
-async function findNotes() {
-    files = await fs.readdir(`${__dirname}/${folderName}`)
+function findNotes() {
+    files = fs.readdirSync(`${__dirname}/${folderName}`)
     return files;
 };
 
-async function findContentNotes(f) {
-    content = await fs.readFile(`${__dirname}/${folderName}/${f}`)
+function findContentNotes(f) {
+    content = fs.readFileSync(`${__dirname}/${folderName}/${f}`)
     return content;
 }
 
