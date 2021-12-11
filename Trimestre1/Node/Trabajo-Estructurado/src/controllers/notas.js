@@ -10,11 +10,6 @@ require('dotenv').config({ path: '../../.env' });
 
 // Muestra todas las notas
 async function showNotes(req, res) {
-    // útiles
-    let isDesc = true;
-    // const notesReverse = allNotes.reverse()
-    // const notesToSort = allNotes
-    // Manda cada uno de las notas
 
     const notes = findNotes();
 
@@ -28,7 +23,7 @@ async function showNotes(req, res) {
 
     // filtro
     const filteredNotes = filterObject(allNotes, filters);
-        
+
     // sort
     if (Object.keys(req.query) == 'orderby' && Object.values(req.query) == 'name') {
         const sortedNotes = sortObject(filteredNotes)
@@ -46,8 +41,6 @@ async function showNotes(req, res) {
         return res.status(200).send(paginatedNotes)
     }
 
-    //return res.status(200).send(filteredNotes)
-    
     logger.info('OK - Notas disponibles mostradas');
     return res.status(200).send(filteredNotes)
 
@@ -59,12 +52,12 @@ async function showNote(req, res) {
     let finded;
     // Manda cada uno de las notas
     const notes = findNotes()
-        for (let index = 0; index <= notes.length; index++) {
-            if (index == id) {
-                let noteContent = fs.readFileSync(`${currentNotes}/notes/${notes[index]}`, 'utf-8')
-                finded = { name: notes[index], content: noteContent }
-            }
+    for (let index = 0; index <= notes.length; index++) {
+        if (index == id) {
+            let noteContent = fs.readFileSync(`${currentNotes}/notes/${notes[index]}`, 'utf-8')
+            finded = { name: notes[index], content: noteContent }
         }
+    }
     logger.info('OK - Nota disponible mostrada');
     return res.status(200).send(finded)
 }
@@ -81,30 +74,30 @@ async function editNote(req, res) {
     const id = req.params.id;
     const newContent = req.body;
     const notes = findNotes()
-        for (let index = 0; index <= notes.length; index++) {
-            if (index == id) {
-                fs.writeFileSync(`${currentNotes}/notes/${notes[index]}`, newContent.content, function (err) {
-                    if (err) throw err;
-                });
-            };
+    for (let index = 0; index <= notes.length; index++) {
+        if (index == id) {
+            fs.writeFileSync(`${currentNotes}/notes/${notes[index]}`, newContent.content, function (err) {
+                if (err) throw err;
+            });
         };
-        logger.info('OK - Nota editada');
-        return res.status(200).send('Nota editada');
-    }
+    };
+    logger.info('OK - Nota editada');
+    return res.status(200).send('Nota editada');
+}
 
 // Elimina una nota, cuya id se pasa por parámetro
 async function removeNote(req, res) {
     const id = req.params.id;
     const notes = findNotes()
-        for (let index = 0; index <= notes.length; index++) {
-            if (index == id) {
-                fs.unlinkSync(`${currentNotes}/notes/${notes[index]}`, function (err) {
-                    if (err) throw err;
-                });
-            }
-        };
-        logger.info('OK - Nota eliminada');
-        return res.status(200).send('Nota eliminada');
+    for (let index = 0; index <= notes.length; index++) {
+        if (index == id) {
+            fs.unlinkSync(`${currentNotes}/notes/${notes[index]}`, function (err) {
+                if (err) throw err;
+            });
+        }
+    };
+    logger.info('OK - Nota eliminada');
+    return res.status(200).send('Nota eliminada');
 }
 
 // Logueo de usuario para recibir token

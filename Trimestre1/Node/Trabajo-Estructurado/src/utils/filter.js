@@ -1,9 +1,11 @@
+// Filtrar objeto
 function filterObject(items, filters) {
     return items.filter(item => (
         Object.entries(filters).every(([key, value]) => value === undefined || item[key] == value)
     ));
 }
 
+// Ordenar objeto
 function sortObject(items) {
     return items.sort(function (a, b) {
         if (a.name < b.name) { return -1; }
@@ -12,6 +14,8 @@ function sortObject(items) {
     })
 }
 
+
+// Paginar objeto
 function paginateObject(items, page_size, page_number) {
     return items.slice((page_number - 1) * page_size, page_number * page_size);
 }

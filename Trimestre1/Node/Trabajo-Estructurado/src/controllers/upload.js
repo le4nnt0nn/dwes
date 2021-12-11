@@ -1,21 +1,25 @@
 const multer = require('multer')
 const { dirUtils } = require('../utils/helper')
 
+
+// Define dónde van a ser guardadas las subidas
 const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
+    destination: function (req, file, cb) {
         cb(null, dirUtils + '/notes/')
     },
-    filename: function(req, file, cb) {
+    filename: function (req, file, cb) {
         cb(null, `${file.originalname}`)
     }
 })
 
 const upload = multer({ storage: storage })
 
+// Un sólo archivo
 exports.upload = upload.single('myFile')
 
+// Varios archivos
 exports.upload = upload.array('multiFiles')
 
 exports.uploadFile = (req, res) => {
-    res.json({data: 'ARCHIVO SUBIDO'})
+    res.json({ data: 'ARCHIVO SUBIDO' })
 }

@@ -10,6 +10,8 @@ router.get('/notas/:id', showNote);
 router.post('/notas/:name', authJWT, addNote);
 router.put('/notas/:id', authJWT, editNote);
 router.delete('/notas/:id', authJWT, removeNote);
+
+// Logueo para generar token
 router.post('/login', loginUser);
 
 module.exports = router;
