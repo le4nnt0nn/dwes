@@ -1,7 +1,7 @@
 // Exporta la ruta donde se encuentra la carpeta notes
 
-const dirUtils = __dirname
+const dirNotes = __dirname
 
 module.exports = {
-    dirUtils
+    dirNotes
 }

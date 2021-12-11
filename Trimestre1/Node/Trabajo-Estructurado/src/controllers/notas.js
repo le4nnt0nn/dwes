@@ -1,9 +1,8 @@
 const { logger } = require("../utils");
 const { findNotes, currentNotes, addNoteDir, findUser } = require('../utils/dir');
-const { envToken, users } = require('../utils/stored');
+const { dirNotes } = require('../helper')
 const { filterObject, sortObject, paginateObject } = require('../utils/filter');
 const jwt = require('jsonwebtoken');
-const path = require('path');
 const fs = require("fs")
 require('dotenv').config({ path: '../../.env' });
 
@@ -17,7 +16,7 @@ async function showNotes(req, res) {
     const { name } = req.query;
     const filters = { name };
     const allNotes = notes.map(note => {
-        const noteContent = fs.readFileSync(`${currentNotes}/notes/${note}`, 'utf-8')
+        const noteContent = fs.readFileSync(`${dirNotes}/notes/${note}`, 'utf-8')
         return { name: note, content: noteContent };
     });
 
@@ -54,7 +53,7 @@ async function showNote(req, res) {
     const notes = findNotes()
     for (let index = 0; index <= notes.length; index++) {
         if (index == id) {
-            let noteContent = fs.readFileSync(`${currentNotes}/notes/${notes[index]}`, 'utf-8')
+            let noteContent = fs.readFileSync(`${dirNotes}/notes/${notes[index]}`, 'utf-8')
             finded = { name: notes[index], content: noteContent }
         }
     }
@@ -76,7 +75,7 @@ async function editNote(req, res) {
     const notes = findNotes()
     for (let index = 0; index <= notes.length; index++) {
         if (index == id) {
-            fs.writeFileSync(`${currentNotes}/notes/${notes[index]}`, newContent.content, function (err) {
+            fs.writeFileSync(`${dirNotes}/notes/${notes[index]}`, newContent.content, function (err) {
                 if (err) throw err;
             });
         };
@@ -91,7 +90,7 @@ async function removeNote(req, res) {
     const notes = findNotes()
     for (let index = 0; index <= notes.length; index++) {
         if (index == id) {
-            fs.unlinkSync(`${currentNotes}/notes/${notes[index]}`, function (err) {
+            fs.unlinkSync(`${dirNotes}/notes/${notes[index]}`, function (err) {
                 if (err) throw err;
             });
         }

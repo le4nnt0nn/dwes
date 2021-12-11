@@ -1,10 +1,10 @@
 const fs = require("fs");
-const { dirUtils } = require('../utils/helper')
+const { dirNotes } = require('../helper')
 const baseUrl = "http://localhost:3000/download/";
 
 // Coge toda la lista de ficheros disponibles con su enlace de descarga
 const getListFiles = (req, res) => {
-    const directoryPath = dirUtils + "/notes/";
+    const directoryPath = dirNotes + "/notes/";
 
     fs.readdir(directoryPath, function (err, files) {
         if (err) {
@@ -29,7 +29,7 @@ const getListFiles = (req, res) => {
 // Descarga los ficheros usando los parámetros
 const download = (req, res) => {
     const fileName = req.params.name;
-    const directoryPath = dirUtils + "/notes/";
+    const directoryPath = dirNotes + "/notes/";
 
     res.download(directoryPath + fileName, fileName, (err) => {
         if (err) {

@@ -1,28 +1,26 @@
 const fs = require('fs');
 require('dotenv').config({ path: '../../.env' });
+const { dirNotes } = require('../helper')
 
 const folderName = 'notes';
 let files;
 let content;
 
-// Directorio de notas
-const currentNotes = __dirname;
-
 // Leer notas
 function findNotes() {
-    files = fs.readdirSync(`${__dirname}/${folderName}`)
+    files = fs.readdirSync(`${dirNotes}/${folderName}`)
     return files;
 };
 
 // Encontrar nota específica
 function findContentNotes(f) {
-    content = fs.readFileSync(`${__dirname}/${folderName}/${f}`)
+    content = fs.readFileSync(`${dirNotes}/${folderName}/${f}`)
     return content;
 }
 
 // Añadir nota a directorio a través de body
 async function addNoteDir(name, content) {
-    fs.writeFile(`${__dirname}/${folderName}/${name}.note`, content, function (err) {
+    fs.writeFile(`${dirNotes}/${folderName}/${name}.note`, content, function (err) {
         if (err) throw err;
     })
 }
@@ -37,7 +35,6 @@ async function findUser(username, password) {
 
 module.exports = {
     findNotes,
-    currentNotes,
     findContentNotes,
     addNoteDir,
     findUser,
