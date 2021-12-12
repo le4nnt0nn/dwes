@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "5e1f86c1-a0c5-4b6d-a818-b78d90da2203",
+		"name": "Notes Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": ""
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"antonio\",\r\n    \"password\":\"mypass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/login"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Notes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/notas"
+			},
+			"response": []
+		},
+		{
+			"name": "GET One Note",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/notas/1"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Create Note (require Token)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFudG9uaW8iLCJpYXQiOjE2MzkzMDkyNDd9.IGTEhamz_NxFN7nzSTEtDo0DP9Sp_qklva8Evgrxxkg"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\":\"contenido de sapo nota\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/notas/sapoNota78"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Edit Note (require Token)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFudG9uaW8iLCJpYXQiOjE2MzkyMjMwMjN9.87KbHF5MyKdvmGP8vz1PBZo3sL6dITvsce190QRtzlk"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\":\"nota editada\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/notas/4"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Remove Note (require Token)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFudG9uaW8iLCJpYXQiOjE2MzkyMjMwMjN9.87KbHF5MyKdvmGP8vz1PBZo3sL6dITvsce190QRtzlk"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:3000/notas/10"
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Note (require Token)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFudG9uaW8iLCJpYXQiOjE2MzkyMjMwMjN9.87KbHF5MyKdvmGP8vz1PBZo3sL6dITvsce190QRtzlk"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "myFile",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						},
+						{
+							"key": "multiFiles",
+							"type": "file",
+							"src": [
+								"/C:/Users/Usuario/Documents/otranota.note",
+								"/C:/Users/Usuario/Documents/otrannota2.note"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/upload",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"upload"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/download"
+			},
+			"response": []
+		},
+		{
+			"name": "Download Specific Note",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/download/finn.note"
+			},
+			"response": []
+		}
+	]
+}
