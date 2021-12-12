@@ -1,0 +1,296 @@
+openapi: 3.0.0
+info:
+  title: Notas API
+  contact:
+    name: Antonio Cortés
+    url: le4nnt0nn.github.io
+    email: ditacj78@gmail.com
+  description:
+    Aplicación RESTful API para la manipulación de ficheros .note a través de
+    métodos HTTP.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local
+paths:
+  /notas:
+    get:
+      security:
+        - OAuth2: [admin]
+      summary: Retorna una lista de todas las notas.
+      parameters:
+        - in: query
+          name: name
+          example: nota1.note
+          schema:
+            type: string
+          description: Filtra y busca la nota por nombre
+        - in: query
+          name: orderby
+          example: asc
+          schema:
+            type: string
+          description: Ordenar de forma descendente (desc), ascendente (asc) o nombre (name)
+        - in: query
+          name: limit
+          example: 2
+          schema:
+            type: integer
+          description: El número de notas a retornar
+      description: Lista de todas las notas.
+      responses:
+        '200':
+          description: Notas disponibles mostradas
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - name: nota1.note
+                    content: contenido
+                  - name: nota2.note
+                    content: contenido
+                  - name: nota3.note
+                    content: contenido
+                items:
+                  type: object
+        '404':
+          description: Not found
+  /notas/{notaId}:
+    get:
+      security:
+        - OAuth2: [admin]
+      summary: Retorna una nota por su ID.
+      parameters:
+        - name: notaId
+          in: path
+          required: true
+          description: Añade la ID de la nota a mostrar.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            example: 1
+      responses:
+        '200':
+          description: Nota disponible mostrada
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  name: nota1.note
+                  content: contenido
+                items:
+                  type: object
+        '404':
+          description: Not found
+    put:
+      summary: Actualiza una nota por su ID.
+      parameters:
+        - name: notaId
+          in: path
+          required: true
+          description: Añade la ID de la nota a editar.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contenido:
+                  type: string
+                  example: este es el nuevo contenido
+      responses:
+        '200':
+          description: Nota editada
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  name: nota1.note
+                  content: contenido editado
+                items:
+                  type: object
+        '404':
+          description: Not found
+    delete:
+      summary: Elimina una nota por su ID.
+      parameters:
+        - name: notaId
+          in: path
+          required: true
+          description: Añade la ID de la nota a eliminar.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            example: 1
+      responses:
+        '200':
+          description: Nota eliminada
+        '404':
+          description: Not found
+  /notas/{name}:
+    post:
+      summary: Añade una nota.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Añade el nombre de la nota.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contenido:
+                  type: string
+                  example: este es el contenido para la nueva nota
+      responses:
+        '201':
+          description: Nota creada
+        '404':
+          description: Directorio no encontrado
+  /login:
+    post:
+      security:
+        - OAuth2: [admin]
+      tags:
+      - login
+      summary: Logueo para ejecutar métodos HTTP de edición.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: usuario
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  access: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFudG9uaW8iLCJpYXQiOjE2MzkzMDkyNDd9.IGTEhamz_NxFN7nzSTEtDo0DP9Sp_qklva8Evgrxxkg
+                items:
+                  type: object
+        '404':
+          description: Usuario o contraseña inválida
+  /download:
+    get:
+      security:
+        - OAuth2: [admin]
+      tags:
+      - download
+      summary: Retorna una lista de las notas para descargar.
+      description: Lista de todas las notas con enlace.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - name: nota1.note
+                    url: http://localhost:3000/download/nota1.note
+                  - name: nota2.note
+                    url: http://localhost:3000/download/nota2.note
+                  - name: nota3.note
+                    url: http://localhost:3000/download/nota3.note
+                items:
+                  type: object
+        '500':
+          description: No se puede descargar la nota
+  /upload:
+    post:
+      tags:
+      - upload
+      summary: Sube una o varias notas.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              example:
+                  - file: nota1.note
+                  - file: nota2.note
+              items:
+                type: object
+      responses:
+        '201':
+          description: ARCHIVO SUBIDO
+        '404':
+          description: Directorio no encontrado
+components:
+  schemas:
+    Nota:
+      type: object
+      properties:
+        name:
+          type: string
+          example: nota.note
+        content:
+          type: string
+          example: Esto es un contenedor contenido en un nido
+      required:  
+        - id
+        - name
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+          example: anton78
+        password:
+          type: string
+          example: secreta@656
+      required:  
+        - id
+        - name
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/oauth/authorize
+          tokenUrl: https://example.com/oauth/token
+          scopes:
+            admin: Grants access to admin operations
+security:
+  - bearerAuth: []
+  - OAuth2:
+    - read
+    - write
+    - admin
+    
+    
+
+
+
+
+
