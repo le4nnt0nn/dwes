@@ -4,6 +4,9 @@ const { showNotes, showNote } = require("../src/controllers/notas");
 const mockReq = (id) => ({
     params: {
         id,
+    },
+    query: {
+        
     }
 });
 

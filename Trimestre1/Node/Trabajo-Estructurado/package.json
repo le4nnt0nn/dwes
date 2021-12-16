@@ -2,8 +2,9 @@
   "name": "trabajo-estructurado",
   "version": "1.0.0",
   "description": "Proyecto Notas",
-  "main": "index.js",
+  "main": "src\\index.js",
   "scripts": {
+    "start": "nodemon src\\index.js",
     "test": "jest",
     "@comment crear": "Crea una nota",
     "crear": "node index.js 1",
@@ -23,6 +24,7 @@
     "fs-promise": "^2.0.3",
     "glob": "^7.2.0",
     "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.4",
     "path": "^0.12.7",
     "prompt-sync": "^4.2.0",
     "winston": "^3.3.3"
