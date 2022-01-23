@@ -1,8 +1,13 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
+const app = express();
 
-const { port } = require('./config');
+const Product = require('./routes/product');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
-const server = express();
+app.use('/product', Product);
 
+module.exports = app
