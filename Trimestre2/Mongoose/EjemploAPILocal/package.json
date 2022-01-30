@@ -1,0 +1,23 @@
+{
+  "name": "ejemploapilocal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker": "sudo docker-compose up -d",
+    "mongod": "sudo mongod"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "logger": "^0.0.1",
+    "mongoose": "^6.1.8"
+  }
+}
