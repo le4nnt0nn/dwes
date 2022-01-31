@@ -1,7 +1,7 @@
 const mongoose = require("mongoose"); //import mongoose
 
 // product schema
-const weatherDataSchema = new mongoose.Schema({
+const data = new mongoose.Schema({
     "st": {
         "type": "String"
     },
@@ -129,5 +129,5 @@ const weatherDataSchema = new mongoose.Schema({
     }
 });
 
-const WeatherData = mongoose.model('WeatherData', weatherDataSchema);
-module.exports = WeatherData;
+const Data = mongoose.model('Data', data);
+module.exports = Data;
