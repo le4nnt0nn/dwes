@@ -1,45 +1,46 @@
-const WeatherData = require('../models/weatherdata');
+const Data = require('../models/weatherdata');
 
 function listall(req, res) {
-    WeatherData.find({})
-        .then(weatherDatas => {
-            if(weatherDatas.length) return res.status(200).send({weatherDatas})
+    const {page = 1, limit = 10} = req.query;
+    Data.find({}).limit(limit*1).skip((page-1)*limit)
+        .then(datas => {
+            if(datas.length) return res.status(200).send({datas})
             return res.status(204).send({message: 'NO CONTENT'});
         }).catch(err => res.status(500).send({err}))
 }
 
 function create(req, res) {
-    let weatherData = new weatherData(req.body);
-    weatherData.save()
-        .then(weatherData => 
-            res.status(201).send({weatherData})
+    let data = new data(req.body);
+    data.save()
+        .then(data => 
+            res.status(201).send({data})
         ).catch(err => res.status(500).send({err}))
     
 }
 
 function show(req, res) {
     if(req.body.error) return res.status(500).send({error});
-    if(!req.body.weatherDatas) return res.status(404).send({message: 'Not Found'});
-    let weatherDatas = req.body.weatherDatas;
-    return res.status(200).send({weatherDatas});
+    if(!req.body.data) return res.status(404).send({message: 'Not Found'});
+    let datas = req.body.datas;
+    return res.status(200).send({datas});
 }
 
 function update(req, res) {
     if(req.body.error) return res.status(500).send({error});
-    if(!req.body.weatherDatas) return res.status(404).send({message: 'Not Found'});
-    let weatherData = req.body.weatherDatas[0];
-    weatherData = Object.assign(weatherData, req.body);
-    weatherData.save()
-        .then(weatherData => res.status(200).send({message: 'weatherData Updated', weatherData})
+    if(!req.body.datas) return res.status(404).send({message: 'Not Found'});
+    let datas = req.body.datas[0];
+    datas = Object.assign(datas, req.body);
+    datas.save()
+        .then(data => res.status(200).send({message: 'data Updated', data})
     ).catch(err => res.status(500).send({err}))
 }
 
 function deleted(req, res) {
     if(req.body.error) return res.status(500).send({error});
-    if(!req.body.weatherDatas) return res.status(404).send({message: 'Not Found'});
-    req.body.weatherDatas[0].remove()
-        .then(weatherData => {
-            res.status(200).send({message:'weatherData removed', weatherData})
+    if(!req.body.datas) return res.status(404).send({message: 'Not Found'});
+    req.body.datas[0].remove()
+        .then(data => {
+            res.status(200).send({message:'data removed', data})
         }
         ).catch(err => res.status(500).send({err}));
 }
@@ -47,9 +48,9 @@ function deleted(req, res) {
 function find(req, res, next){
     let query = {};
     query[req.params.key] = req.params.value
-    WeatherData.find(query).then(weatherDatas => {
-        if(!weatherDatas.length) return next();
-        req.body.weatherDatas = weatherDatas;
+    Data.find(query).then(datas => {
+        if(!datas.length) return next();
+        req.body.datas = datas;
         return next();
     }).catch(err =>{
         req.body.error = err;
