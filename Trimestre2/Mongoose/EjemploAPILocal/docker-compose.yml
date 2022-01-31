@@ -3,7 +3,7 @@ services:
   mongodb:
     image: "mongo:3.6.13-xenial"
     ports:
-      - "28888:28888"
+      - "2888:2888"
     volumes:
       - mongo-data:/data/db
 volumes:
